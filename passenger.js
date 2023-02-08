@@ -26,6 +26,17 @@ function checkNotPaid(passenger) {
     return false;
 }
 
+function printPassenger(passenger) {
+    var hasPaid;
+    if (checkNotPaid(passenger)) {
+        hasPaid = "not paid!";
+    } else {
+        hasPaid = "paid!";
+    }
+    var message = "The passenger: " + passenger.name + " , has " + hasPaid;
+    console.log(message);
+}
+
 function checkAllPassengers(passengers, testFunction) {
     for (var i = 0; i < passengers.length; i++) {
         if (testFunction(passengers[i])) {
@@ -38,6 +49,8 @@ function checkAllPassengers(passengers, testFunction) {
 var havePaid = checkAllPassengers(passenger, checkNotPaid);
 var canFly = checkAllPassengers(passenger, checkNoFlyList);
 
+
 if (!havePaid) {console.log("We can't fly because someone has not paid.")};
 if (!canFly) {console.log("We can't fly because someone is on the no Fly list.")};
+checkAllPassengers(passenger, printPassenger);
 
