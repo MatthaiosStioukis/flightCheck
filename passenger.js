@@ -48,18 +48,36 @@ function checkAllPassengers(passengers, testFunction) {
 // Here I created a function which is responsible just for creating the drink order for each passenger based on their ticket type.
 function createDrinkOrder(passenger) {
     // get drink order
+    var orderFunction;
     if (passenger.ticket === "firstclass") {
-        alert("Would you like cocktail or wine?");
+        orderFunction = function() {
+            alert("Would you like cocktail or wine?");
+        };
     } else {
-        alert("You can choose between cola and water.");
+        orderFunction = function() {
+            alert("You can choose between cola and water.");
+        };
     }
+    return orderFunction;
 }
 
 function serveCustomer(passenger) {
     // get drink order
-    createDrinkOrder(passenger);
+    var getDrinkOrderFunction = createDrinkOrder(passenger);
+    getDrinkOrderFunction();
     // get dinner order
+    getDrinkOrderFunction();
+    getDrinkOrderFunction();
+    // show movie
+    getDrinkOrderFunction();
     // pick up trash
+
+}
+
+function servePassengers(passengers) {
+    for (var i = 0; i < passengers.length; i++) {
+        serveCustomer(passengers[i]);
+    };
 }
 
 var havePaid = checkAllPassengers(passenger, checkNotPaid);
@@ -69,4 +87,4 @@ var canFly = checkAllPassengers(passenger, checkNoFlyList);
 if (!havePaid) {console.log("We can't fly because someone has not paid.")};
 if (!canFly) {console.log("We can't fly because someone is on the no Fly list.")};
 checkAllPassengers(passenger, printPassenger);
-checkAllPassengers(passenger, serveCustomer);
+servePassengers(passenger);
